@@ -1,0 +1,46 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Fake server viewer
+      </h1>
+      <p>Make some request at your and you will be your request here</p>
+    </div>
+  </div>
+</section>
+
+<div class="container" *ngIf="requestDataList$ | async as requestDataList">
+  <h1 class="title m-2">Requests - {{requestDataList.length}} <input class="input" type="text" placeholder="Text input"></h1>
+  <div class="tile m-2" *ngFor="let item of requestDataList">
+    <div class="container">
+      <article class="panel" [class]="200 !== 200 ? 'is-danger' : 'is-success'">
+        <p class="panel-heading">
+          [{{item.method}}] {{item.url}}
+          <span class="is-pulled-right">200</span>
+        </p>
+        <div class="panel-block is-flex-direction-column is-align-items-flex-start" *ngIf="item">
+          <h2 class="subtitle">Headers</h2>
+          <table class="table">
+            <tbody>
+            <tr *ngFor="let h of item.headers | keyvalue">
+              <th><strong>{{h.key}}</strong></th>
+              <td>{{h.value}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <h2 class="subtitle">Body</h2>
+          <pre class="container"><code>{{item.body | json}}</code></pre>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+    </p>
+  </div>
+</footer>
